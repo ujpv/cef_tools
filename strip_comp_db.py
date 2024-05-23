@@ -18,6 +18,9 @@ white_list = [
 
 def check(item):
     for path in white_list:
+        if item.get("command", "").startswith("python"):
+            return False
+
         if path in item.get("file", ""):
             return True
 
