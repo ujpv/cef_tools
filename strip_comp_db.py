@@ -15,11 +15,24 @@ white_list = [
     "../../v8/"
 ]
 
+ignored_commands = [
+    "python",
+    "ls",
+    "rm",
+    "touch"
+]
+
+def check_command(command):
+    for item in ignored_commands:
+        if command.startswith(item):
+            return False
+
+    return True
 
 def check(item):
     for path in white_list:
         command = item.get("command", "")
-        if command.startswith("python") or command.startswith("/bin/ln") or command.startswith("/bin/rm"):
+        if not check_command(command):
             return False
 
         if path in item.get("file", ""):
