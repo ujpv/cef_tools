@@ -1,6 +1,5 @@
 import json
 import argparse
-import codecs
 
 white_list = [
     "../../base/",
@@ -19,7 +18,8 @@ white_list = [
 
 def check(item):
     for path in white_list:
-        if item.get("command", "").startswith("python"):
+        command = item.get("command", "")
+        if command.startswith("python") or command.startswith("/bin/ln") or command.startswith("/bin/rm"):
             return False
 
         if path in item.get("file", ""):
