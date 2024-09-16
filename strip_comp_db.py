@@ -1,5 +1,6 @@
 import json
 import argparse
+import codecs
 
 white_list = [
     "../../base/",
@@ -34,7 +35,7 @@ def main():
     args = parser.parse_args()
 
     print("Reading compilation database...", end="")
-    with open(args.input) as f:
+    with open(args.input, encoding="utf-8", errors='ignore') as f:
         items = json.load(f)
     print(f"Done({len(items)} records)")
 
