@@ -12,12 +12,17 @@ white_list = [
     "../../skia/",
     "../../ui/",
     "../../url/",
-    "../../v8/"
+    "../../v8/",
+    "../../ui/latency",
+    "../../third_party/blink/",
+    "../../third_party/skia/",
+    "../../components/viz/",
 ]
 
 ignored_commands = [
     "python",
-    "ls",
+    "\"python",
+    "ln",
     "rm",
     "touch"
 ]
@@ -32,10 +37,12 @@ def check_command(command):
 def check(item):
     for path in white_list:
         command = item.get("command", "")
+
         if not check_command(command):
             return False
 
-        if path in item.get("file", ""):
+        file = item.get("file", "")
+        if path in file:
             return True
 
     return False
